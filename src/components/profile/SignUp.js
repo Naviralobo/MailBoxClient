@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import classes from "./SignUp.module.css";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/AuthSlice";
 
 const SignUp = (props) => {
   const history = useHistory();
@@ -8,6 +10,7 @@ const SignUp = (props) => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const confirmPasswordInputRef = useRef();
+  const dispatch = useDispatch();
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -66,7 +69,8 @@ const SignUp = (props) => {
         } else {
           alert("Successfully Logged in");
         }
-        localStorage.setItem("token", data.idToken);
+        dispatch(authActions.login(data.idToken));
+        dispatch(authActions.setUserId(enteredEmail));
         history.push("/welcome");
       })
       .catch((err) => {
