@@ -61,3 +61,19 @@
   background-color: #873abb;
   border-color: #873abb;
 }
+
+.toggle {
+  background-color: #38015c;
+  color: #e9e7eb;
+  border-radius: 8px;
+  border: 1px solid rgb(232, 225, 225);
+  width: 20%;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 10px;
+  margin-left: 40%;
+}
+
+.toggle:hover {
+  background-color: #873abb;
+}

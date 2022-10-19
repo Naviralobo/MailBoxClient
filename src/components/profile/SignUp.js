@@ -1,69 +1,122 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import classes from "./SignUp.module.css";
+import { useHistory } from "react-router-dom";
 
-const SignUp = () => {
+const SignUp = (props) => {
+  const history = useHistory();
+  const [isLogin, setIsLogin] = useState(false);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const confirmPasswordInputRef = useRef();
+
+  const switchAuthModeHandler = () => {
+    setIsLogin((prevState) => !prevState);
+  };
 
   const submitHandler = (event) => {
     event.preventDefault();
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
-    const confirmPassword = confirmPasswordInputRef.current.value;
-
-    if (enteredPassword === confirmPassword) {
-      fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBY14qxLcnXSBi5byeO0muMk0aH0AYxBQE",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: enteredEmail,
-            password: enteredPassword,
-            returnSecureToken: true,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((res) => console.log("user has successfully signed up"))
-        .catch((err) => alert("something went wrong"));
-    } else {
-      alert("password mismatch");
+    let confirmPassword;
+    if (!isLogin) {
+      confirmPassword = confirmPasswordInputRef.current.value;
     }
+
+    let url;
+
+    if (!isLogin) {
+      if (enteredPassword !== confirmPassword) {
+        alert("password mismatch");
+      } else {
+        url =
+          "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDBDNLlgXE3aUD1Tkn4aG-tSIbGYJlUEjc";
+      }
+    } else if (isLogin) {
+      url =
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDBDNLlgXE3aUD1Tkn4aG-tSIbGYJlUEjc";
+    }
+
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        email: enteredEmail,
+        password: enteredPassword,
+        returnSecureToken: true,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return res.json().then((data) => {
+            let errorMessage = "Authentication Failed";
+            if (data && data.error && data.message)
+              errorMessage = data.error.message;
+
+            throw new Error(errorMessage);
+          });
+        }
+      })
+      .then((data) => {
+        if (!isLogin) {
+          alert("Successfully Signed up");
+        } else {
+          alert("Successfully Logged in");
+        }
+        localStorage.setItem("token", data.idToken);
+        history.push("/welcome");
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   };
+
   return (
-    <section className={classes.auth}>
-      <h1>SignUp</h1>
-      <form onSubmit={submitHandler}>
-        <div className={classes.control}>
-          <label htmlFor="email">Your Email</label>
-          <input type="text" id="email" required ref={emailInputRef} />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="password">Your Password</label>
-          <input
-            type="password"
-            id="password"
-            required
-            ref={passwordInputRef}
-          />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            required
-            ref={confirmPasswordInputRef}
-          />
-        </div>
-        <div className={classes.actions}>
-          <button>SignUp</button>
-        </div>
-      </form>
-    </section>
+    <div className={classes.div}>
+      <section className={classes.auth}>
+        <h1>{isLogin ? "Login" : "Signup"}</h1>
+        <form onSubmit={submitHandler}>
+          <div className={classes.control}>
+            <label htmlFor="email">Your Email</label>
+            <input type="text" id="email" required ref={emailInputRef} />
+          </div>
+          <div className={classes.control}>
+            <label htmlFor="password">Your Password</label>
+            <input
+              type="password"
+              id="password"
+              required
+              ref={passwordInputRef}
+            />
+          </div>
+          {!isLogin && (
+            <div className={classes.control}>
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                required
+                ref={confirmPasswordInputRef}
+              />
+            </div>
+          )}
+          <div className={classes.actions}>
+            <button type="submit">{isLogin ? "Login" : "Signup"}</button>
+          </div>
+        </form>
+      </section>
+
+      <button
+        type="button"
+        className={classes.toggle}
+        onClick={switchAuthModeHandler}
+      >
+        {isLogin ? "Dont have an account? Signup" : "Have an Account?Login"}
+      </button>
+    </div>
   );
 };
 
