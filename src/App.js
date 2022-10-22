@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import SignUp from "./components/profile/SignUp";
 import Welcome from "./components/Welcome/Welcome";
 import { authActions } from "./store/AuthSlice";
+import ComposeMail from "./components/Welcome/ComposeMail";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,10 +18,13 @@ function App() {
           <Redirect to="/" />
         </Route>
       )}
-      {isAuth && <Redirect to="/welcome" />}
+      {isAuth && <Redirect to="/composeMail" />}
 
       <Route path="/welcome">
         <Welcome />
+      </Route>
+      <Route path="/composeMail">
+        <ComposeMail />
       </Route>
     </>
   );
