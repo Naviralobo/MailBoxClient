@@ -35,6 +35,7 @@ const authSlice = createSlice({
         state.token = localStorage.getItem("tokenET");
         const UID = localStorage.getItem("email");
         state.userId = UID.replace(/[@,.]/g, "");
+        state.recieverId = localStorage.getItem("reciever");
       }
     },
   },
