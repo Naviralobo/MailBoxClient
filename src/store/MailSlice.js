@@ -26,6 +26,10 @@ const mailSlice = createSlice({
       });
       state.unread++;
     },
+    deleteMail(state, action) {
+      const id = action.payload;
+      state.mails = state.mails.filter((mail) => mail.id !== id);
+    },
     updateMail(state, action) {
       const updatedMail = action.payload;
       state.currentMail = updatedMail;

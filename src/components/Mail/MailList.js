@@ -35,13 +35,28 @@ const MailList = (props) => {
       .catch((err) => alert(err));
     history.push("./readMail");
   };
+  const deleteMailHandler = () => {
+    axios
+      .delete(
+        `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${reciever}${userId}/${props.id}.json`
+      )
 
+      .then((res) => {
+        dispatch(mailActions.deleteMail(props.id));
+      })
+      .catch((err) => alert(err));
+  };
   return (
     <>
-      <div className={classes.list} onClick={readMessageHandler}>
-        {!props.isRead && <div className={classes.circle} />}
-        <div className={classes.to}>{props.to}</div>
-        <div>{props.subject}</div>
+      <div className={classes.list}>
+        <div className={classes.symbolTo} onClick={readMessageHandler}>
+          {!props.isRead && <div className={classes.circle} />}
+          <div className={classes.to}>{props.to}</div>
+        </div>
+        <div className={classes.subject}>{props.subject}</div>
+        <div className={classes.delete}>
+          <button onClick={deleteMailHandler}>Delete</button>
+        </div>
       </div>
     </>
   );
