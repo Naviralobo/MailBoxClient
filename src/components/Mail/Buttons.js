@@ -8,6 +8,12 @@ const Buttons = () => {
   const composeButtonHandler = () => {
     history.push("./composeMail");
   };
+  const openInboxHandler = () => {
+    history.replace("./mailBox");
+  };
+  const openSentMailHandler = () => {
+    history.replace("./mailBox");
+  };
   return (
     <div>
       <button className={classes.composeButton} onClick={composeButtonHandler}>
@@ -16,13 +22,19 @@ const Buttons = () => {
 
       <div className={classes.views}>
         <div className={classes.unread}>
-          <span>Inbox</span>
+          <button className={classes.inbox} onClick={openInboxHandler}>
+            Inbox
+          </button>
           <span>{unRead}</span>
         </div>
         <div>Unread</div>
         <div>starred</div>
         <div>Drafts</div>
-        <div>Sent</div>
+        <div>
+          <button className={classes.sent} onClick={openSentMailHandler}>
+            Sent
+          </button>
+        </div>
         <div>Archive</div>
         <div>spam</div>
         <div>Deleted Items</div>

@@ -21,3 +21,11 @@
   display: flex;
   justify-content: space-between;
 }
+.sent {
+  background-color: transparent;
+  border: none;
+}
+.inbox {
+  background-color: transparent;
+  border: none;
+}
