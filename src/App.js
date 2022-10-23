@@ -6,6 +6,7 @@ import { authActions } from "./store/AuthSlice";
 import { mailActions } from "./store/MailSlice";
 import ComposeMail from "./components/Mail/ComposeMail";
 import MailBox from "./components/Mail/MailBox";
+import ReadMail from "./components/Mail/ReadMail";
 import axios from "axios";
 
 function App() {
@@ -23,9 +24,9 @@ function App() {
 
       let mailArray = [];
       for (let id in datas) {
-        let mail = datas[id];
-        mail.id = id;
-        mailArray.push(mail);
+        let mails = datas[id];
+        mails.id = id;
+        mailArray.push(mails);
       }
       dispatch(mailActions.addMail(mailArray));
     });
@@ -44,6 +45,9 @@ function App() {
       </Route>
       <Route path="/mailBox">
         <MailBox />
+      </Route>
+      <Route path="/readMail">
+        <ReadMail />
       </Route>
     </>
   );

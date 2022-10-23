@@ -2,19 +2,18 @@ import MailHeader from "./MailHeader";
 import Buttons from "./Buttons";
 import classes from "./MailBox.module.css";
 import MailList from "./MailList";
-import axios from "axios";
 import { useSelector } from "react-redux";
 const MailBox = () => {
-  const reciever = localStorage.getItem("reciever");
-  const userId = useSelector((state) => state.auth.userId);
   const mails = useSelector((state) => state.mail.mails);
 
   const mailList = mails.map((mail) => (
     <MailList
+      key={mail.id}
       subject={mail.subject}
       to={mail.to}
       id={mail.id}
       message={mail.message}
+      isRead={mail.isRead}
     />
   ));
   return (
@@ -24,7 +23,7 @@ const MailBox = () => {
         <div className={classes.buttons}>
           <Buttons />
         </div>
-        <div className={classes.list}>{mailList}</div>
+        <div className={classes.list}> {mailList}</div>
       </div>
     </div>
   );

@@ -17,3 +17,7 @@
   font-size: larger;
   margin-bottom: 10px;
 }
+.unread {
+  display: flex;
+  justify-content: space-between;
+}
