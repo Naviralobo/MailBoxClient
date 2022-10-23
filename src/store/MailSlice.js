@@ -15,16 +15,24 @@ const mailSlice = createSlice({
         }
       });
     },
+    sentMail(state, action) {
+      state.mails = action.payload;
+    },
     addMailToList(state, action) {
-      const newMail = action.payload;
-      state.mails.push({
-        subject: newMail.subject,
-        message: newMail.message,
-        id: newMail.id,
-        to: newMail.to,
-        isRead: newMail.isRead,
-      });
-      state.unread++;
+      if (
+        localStorage.getItem("email").replace(/[@,.]/g, "") ===
+        localStorage.getItem("reciever")
+      ) {
+        const newMail = action.payload;
+        state.mails.push({
+          subject: newMail.subject,
+          message: newMail.message,
+          id: newMail.id,
+          to: newMail.to,
+          isRead: newMail.isRead,
+        });
+        state.unread++;
+      }
     },
     deleteMail(state, action) {
       const id = action.payload;

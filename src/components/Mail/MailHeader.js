@@ -1,7 +1,12 @@
 import classes from "./MailHeader.module.css";
-
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/AuthSlice";
 const MailHeader = () => {
+  const dispatch = useDispatch();
   const userId = localStorage.getItem("email");
+  const logoutHandler = () => {
+    dispatch(authActions.logout());
+  };
   return (
     <div className={classes.header}>
       <h3>Yahoo!Mail</h3>
@@ -14,6 +19,11 @@ const MailHeader = () => {
       </div>
 
       <div className={classes.userId}>{userId}</div>
+      <div>
+        <button className={classes.logout} onClick={logoutHandler}>
+          Logout
+        </button>
+      </div>
     </div>
   );
 };

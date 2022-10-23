@@ -1,17 +1,51 @@
 import classes from "./Buttons.module.css";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { mailActions } from "../../store/MailSlice";
 
 const Buttons = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const unRead = useSelector((state) => state.mail.unread);
+  const userId = useSelector((state) => state.auth.userId);
   const composeButtonHandler = () => {
     history.push("./composeMail");
   };
   const openInboxHandler = () => {
+    axios
+      .get(
+        `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}inbox.json`
+      )
+      .then((res) => {
+        let datas = res.data;
+
+        let mailArray = [];
+        for (let id in datas) {
+          let mails = datas[id];
+          mails.id = id;
+          mailArray.push(mails);
+        }
+        dispatch(mailActions.addMail(mailArray));
+      });
     history.replace("./mailBox");
   };
   const openSentMailHandler = () => {
+    axios
+      .get(
+        `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}sentbox.json`
+      )
+      .then((res) => {
+        let datas = res.data;
+
+        let mailArray = [];
+        for (let id in datas) {
+          let mails = datas[id];
+          mails.id = id;
+          mailArray.push(mails);
+        }
+        dispatch(mailActions.sentMail(mailArray));
+      });
     history.replace("./mailBox");
   };
   return (

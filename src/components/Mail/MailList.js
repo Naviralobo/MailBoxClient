@@ -11,7 +11,7 @@ const MailList = (props) => {
   const readMessageHandler = () => {
     axios
       .put(
-        `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${reciever}${userId}/${props.id}.json`,
+        `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}inbox/${props.id}.json`,
         {
           to: props.to,
           subject: props.subject,
@@ -20,7 +20,6 @@ const MailList = (props) => {
           id: props.id,
         }
       )
-
       .then((res) => {
         dispatch(
           mailActions.updateMail({
@@ -38,7 +37,7 @@ const MailList = (props) => {
   const deleteMailHandler = () => {
     axios
       .delete(
-        `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${reciever}${userId}/${props.id}.json`
+        `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}inbox/${props.id}.json`
       )
 
       .then((res) => {
