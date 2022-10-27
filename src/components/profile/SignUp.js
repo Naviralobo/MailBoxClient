@@ -71,7 +71,7 @@ const SignUp = (props) => {
         }
         dispatch(authActions.login(data.idToken));
         dispatch(authActions.setUserId(enteredEmail));
-        history.push("/welcome");
+        history.push("/composeMail");
       })
       .catch((err) => {
         alert(err.message);

@@ -4,7 +4,6 @@ import { mailActions } from "../../store/MailSlice";
 import { useHistory } from "react-router-dom";
 import classes from "./MailList.module.css";
 const MailList = (props) => {
-  const reciever = useSelector((state) => state.auth.recieverId);
   const userId = useSelector((state) => state.auth.userId);
   const dispatch = useDispatch();
   const history = useHistory();

@@ -56,18 +56,16 @@ const Buttons = () => {
 
       <div className={classes.views}>
         <div className={classes.unread}>
-          <button className={classes.inbox} onClick={openInboxHandler}>
+          <span className={classes.inbox} onClick={openInboxHandler}>
             Inbox
-          </button>
+          </span>
           <span>{unRead}</span>
         </div>
         <div>Unread</div>
         <div>starred</div>
         <div>Drafts</div>
-        <div>
-          <button className={classes.sent} onClick={openSentMailHandler}>
-            Sent
-          </button>
+        <div className={classes.sent} onClick={openSentMailHandler}>
+          Sent
         </div>
         <div>Archive</div>
         <div>spam</div>

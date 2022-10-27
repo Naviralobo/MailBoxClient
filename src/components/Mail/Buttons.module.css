@@ -7,6 +7,9 @@
   margin-bottom: 10px;
   border-bottom: 1px solid grey;
 }
+.views div :hover {
+  cursor: pointer;
+}
 .composeButton {
   width: 70%;
   margin-left: 15%;
@@ -28,4 +31,7 @@
 .inbox {
   background-color: transparent;
   border: none;
+}
+.sent:hover {
+  cursor: pointer;
 }

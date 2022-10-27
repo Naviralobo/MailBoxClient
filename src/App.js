@@ -14,7 +14,7 @@ function App() {
   dispatch(authActions.setIsAuth());
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const userId = useSelector((state) => state.auth.userId);
-  // const reciever = useSelector((state) => state.auth.recieverId);
+
   axios
     .get(
       `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}inbox.json`
@@ -30,6 +30,7 @@ function App() {
       }
       dispatch(mailActions.addMail(mailArray));
     });
+
   return (
     <>
       {!isAuth && <SignUp />}

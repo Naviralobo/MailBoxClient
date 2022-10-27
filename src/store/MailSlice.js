@@ -8,7 +8,7 @@ const mailSlice = createSlice({
   reducers: {
     addMail(state, action) {
       state.mails = action.payload;
-
+      state.unread = 0;
       state.mails.forEach((mail) => {
         if (!mail.isRead) {
           state.unread++;
