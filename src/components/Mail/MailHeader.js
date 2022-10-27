@@ -1,11 +1,14 @@
 import classes from "./MailHeader.module.css";
+// import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/AuthSlice";
 const MailHeader = () => {
+  // const history = useHistory();
   const dispatch = useDispatch();
   const userId = localStorage.getItem("email");
   const logoutHandler = () => {
     dispatch(authActions.logout());
+    // history.replace("/");
   };
   return (
     <div className={classes.header}>

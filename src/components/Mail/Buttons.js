@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { mailActions } from "../../store/MailSlice";
+import useAxiosGet from "../../hooks/useAxiosGet";
 
 const Buttons = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,19 @@ const Buttons = () => {
   const composeButtonHandler = () => {
     history.push("./composeMail");
   };
+  // let url;
+  // const { data, fetchError } = useAxiosGet(url);
   const openInboxHandler = () => {
+    // url = `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}inbox.json`;
+    // let mailArray = [];
+    // for (let id in data) {
+    //   let mails = data[id];
+    //   mails.id = id;
+    //   mailArray.push(mails);
+    // }
+    // dispatch(mailActions.addMail(mailArray));
+    // history.replace("./mailBox");
+    // fetchError && alert(fetchError);
     axios
       .get(
         `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}inbox.json`
@@ -31,6 +44,14 @@ const Buttons = () => {
     history.replace("./mailBox");
   };
   const openSentMailHandler = () => {
+    // url = `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}sentbox.json`;
+    // let mailArray = [];
+    // for (let id in data) {
+    //   let mails = data[id];
+    //   mails.id = id;
+    //   mailArray.push(mails);
+    // }
+    // dispatch(mailActions.sentMail(mailArray));
     axios
       .get(
         `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}sentbox.json`
