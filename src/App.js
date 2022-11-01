@@ -24,7 +24,6 @@ function App() {
   for (let id in data) {
     let mails = data[id];
     console.log(id);
-    mails.id = id;
     mailArray.push(mails);
   }
   dispatch(mailActions.addMail(mailArray));

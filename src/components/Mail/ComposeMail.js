@@ -42,6 +42,7 @@ const ComposeMail = () => {
 
       .then((res) => {
         // console.log(res.data.name);
+        alert("Message sent successfully");
         dispatch(
           mailActions.addMailToList({
             to: recieverId,
