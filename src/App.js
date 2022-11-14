@@ -18,7 +18,7 @@ function App() {
   const userId = useSelector((state) => state.auth.userId);
 
   const { data, fetchError } = useAxiosGet(
-    `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}inbox.json`
+    `https://mail-chat-new-default-rtdb.firebaseio.com/mails/${userId}inbox.json`
   );
 
   let mailArray = [];

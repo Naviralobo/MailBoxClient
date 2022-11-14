@@ -32,11 +32,11 @@ const SignUp = (props) => {
         alert("password mismatch");
       } else {
         url =
-          "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDBDNLlgXE3aUD1Tkn4aG-tSIbGYJlUEjc";
+          "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCCXFn51V5pTW79oqLt4Wlq2CFzVKhW__w";
       }
     } else if (isLogin) {
       url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDBDNLlgXE3aUD1Tkn4aG-tSIbGYJlUEjc";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCCXFn51V5pTW79oqLt4Wlq2CFzVKhW__w";
     }
 
     fetch(url, {

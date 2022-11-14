@@ -32,12 +32,12 @@ const ComposeMail = () => {
     };
 
     axios.post(
-      `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}sentbox.json`,
+      `https://mail-chat-new-default-rtdb.firebaseio.com/mails/${userId}sentbox.json`,
       mailDetails
     );
     axios
       .post(
-        `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${reciever}inbox.json`,
+        `https://mail-chat-new-default-rtdb.firebaseio.com/mails/${reciever}inbox.json`,
         mailDetails
       )
 

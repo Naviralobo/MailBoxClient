@@ -13,7 +13,7 @@ const MailList = (props) => {
     if (inbox) {
       axios
         .put(
-          `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}inbox/${props.id}.json`,
+          `https://mail-chat-new-default-rtdb.firebaseio.com/mails/${userId}inbox/${props.id}.json`,
           {
             to: props.to,
             subject: props.subject,
@@ -36,13 +36,24 @@ const MailList = (props) => {
           );
         })
         .catch((err) => alert(err));
+    } else {
+      dispatch(
+        mailActions.updateMail({
+          key: props.id,
+          to: props.to,
+          subject: props.subject,
+          message: props.message,
+          isRead: false,
+          id: props.id,
+        })
+      );
     }
     history.push("./readMail");
   };
   const deleteMailHandler = () => {
     axios
       .delete(
-        `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}inbox/${props.id}.json`
+        `https://mail-chat-new-default-rtdb.firebaseio.com/mails/${userId}inbox/${props.id}.json`
       )
 
       .then((res) => {

@@ -16,7 +16,7 @@ const Buttons = () => {
     dispatch(mailActions.setInboxTrue(true));
     axios
       .get(
-        `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}inbox.json`
+        `https://mail-chat-new-default-rtdb.firebaseio.com/mails/${userId}inbox.json`
       )
       .then((res) => {
         let datas = res.data;
@@ -35,7 +35,7 @@ const Buttons = () => {
     dispatch(mailActions.setInboxTrue(false));
     axios
       .get(
-        `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}sentbox.json`
+        `https://mail-chat-new-default-rtdb.firebaseio.com/mails/${userId}sentbox.json`
       )
       .then((res) => {
         let datas = res.data;
