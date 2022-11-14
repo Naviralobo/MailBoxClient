@@ -5,7 +5,7 @@ import { authActions } from "../../store/AuthSlice";
 const MailHeader = () => {
   // const history = useHistory();
   const dispatch = useDispatch();
-  const userId = localStorage.getItem("email");
+  const userId = localStorage.getItem("emailMC");
   const logoutHandler = () => {
     dispatch(authActions.logout());
     // history.replace("/");

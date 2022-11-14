@@ -13,29 +13,29 @@ const authSlice = createSlice({
     login(state, action) {
       state.isAuthenticated = true;
       state.token = action.payload;
-      localStorage.setItem("tokenET", action.payload);
+      localStorage.setItem("tokenMC", action.payload);
     },
     logout(state) {
       state.isAuthenticated = false;
       state.token = "";
-      localStorage.removeItem("tokenET");
-      localStorage.removeItem("email");
+      localStorage.removeItem("tokenMC");
+      localStorage.removeItem("emailMC");
     },
     setUserId(state, action) {
-      localStorage.setItem("email", action.payload);
+      localStorage.setItem("emailMC", action.payload);
       state.userId = action.payload.replace(/[@,.]/g, "");
     },
     setRecieverId(state, action) {
-      localStorage.setItem("reciever", action.payload);
+      localStorage.setItem("recieverMC", action.payload);
       state.recieverId = action.payload.replace(/[@,.]/g, "");
     },
     setIsAuth(state) {
-      if (localStorage.getItem("tokenET")) {
+      if (localStorage.getItem("tokenMC")) {
         state.isAuthenticated = true;
-        state.token = localStorage.getItem("tokenET");
-        const UID = localStorage.getItem("email");
+        state.token = localStorage.getItem("tokenMC");
+        const UID = localStorage.getItem("emailMC");
         state.userId = UID.replace(/[@,.]/g, "");
-        state.recieverId = localStorage.getItem("reciever");
+        state.recieverId = localStorage.getItem("recieverMC");
       }
     },
   },

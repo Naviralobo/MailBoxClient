@@ -4,33 +4,39 @@ import { mailActions } from "../../store/MailSlice";
 import { useHistory } from "react-router-dom";
 import classes from "./MailList.module.css";
 const MailList = (props) => {
+  console.log(props.id);
   const userId = useSelector((state) => state.auth.userId);
+  const inbox = useSelector((state) => state.mail.inbox);
   const dispatch = useDispatch();
   const history = useHistory();
   const readMessageHandler = () => {
-    axios
-      .put(
-        `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}inbox/${props.id}.json`,
-        {
-          to: props.to,
-          subject: props.subject,
-          message: props.message,
-          isRead: true,
-          id: props.id,
-        }
-      )
-      .then((res) => {
-        dispatch(
-          mailActions.updateMail({
+    if (inbox) {
+      axios
+        .put(
+          `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}inbox/${props.id}.json`,
+          {
             to: props.to,
             subject: props.subject,
             message: props.message,
             isRead: true,
             id: props.id,
-          })
-        );
-      })
-      .catch((err) => alert(err));
+          }
+        )
+        .then((res) => {
+          console.log(props.id);
+          dispatch(
+            mailActions.updateMail({
+              key: props.id,
+              to: props.to,
+              subject: props.subject,
+              message: props.message,
+              isRead: true,
+              id: props.id,
+            })
+          );
+        })
+        .catch((err) => alert(err));
+    }
     history.push("./readMail");
   };
   const deleteMailHandler = () => {

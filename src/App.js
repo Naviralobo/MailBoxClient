@@ -16,6 +16,7 @@ function App() {
   dispatch(authActions.setIsAuth());
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const userId = useSelector((state) => state.auth.userId);
+
   const { data, fetchError } = useAxiosGet(
     `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}inbox.json`
   );
@@ -23,8 +24,11 @@ function App() {
   let mailArray = [];
   for (let id in data) {
     let mails = data[id];
+    let mailsPassed = { ...mails };
+    mailsPassed.id = id;
     console.log(id);
-    mailArray.push(mails);
+    // console.log(mailsPassed);
+    mailArray.push(mailsPassed);
   }
   dispatch(mailActions.addMail(mailArray));
 

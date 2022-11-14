@@ -5,7 +5,7 @@ import MailList from "./MailList";
 import { useSelector } from "react-redux";
 const MailBox = () => {
   const mails = useSelector((state) => state.mail.mails);
-
+  console.log(mails);
   const mailList = mails.map((mail) => (
     <MailList
       key={mail.id}

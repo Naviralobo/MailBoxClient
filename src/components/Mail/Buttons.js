@@ -13,6 +13,7 @@ const Buttons = () => {
     history.push("./composeMail");
   };
   const openInboxHandler = () => {
+    dispatch(mailActions.setInboxTrue(true));
     axios
       .get(
         `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}inbox.json`
@@ -31,6 +32,7 @@ const Buttons = () => {
     history.replace("./mailBox");
   };
   const openSentMailHandler = () => {
+    dispatch(mailActions.setInboxTrue(false));
     axios
       .get(
         `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}sentbox.json`

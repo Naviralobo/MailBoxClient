@@ -30,18 +30,18 @@ const ComposeMail = () => {
       subject: subject,
       message: message,
     };
+
     axios.post(
-      `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${reciever}inbox.json`,
+      `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}sentbox.json`,
       mailDetails
     );
     axios
       .post(
-        `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${userId}sentbox.json`,
+        `https://mobile-chat-b9890-default-rtdb.firebaseio.com/mails/${reciever}inbox.json`,
         mailDetails
       )
 
       .then((res) => {
-        // console.log(res.data.name);
         alert("Message sent successfully");
         dispatch(
           mailActions.addMailToList({

@@ -1,11 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialMailState = { mails: [], unread: 0, currentMail: {} };
+const initialMailState = {
+  mails: [],
+  unread: 0,
+  currentMail: {},
+  inbox: true,
+};
 
 const mailSlice = createSlice({
   name: "mails",
   initialState: initialMailState,
   reducers: {
+    setInboxTrue(state, action) {
+      state.inbox = action.payload;
+    },
     addMail(state, action) {
       state.mails = action.payload;
       state.unread = 0;
@@ -20,7 +28,7 @@ const mailSlice = createSlice({
     },
     addMailToList(state, action) {
       if (
-        localStorage.getItem("email").replace(/[@,.]/g, "") ===
+        localStorage.getItem("emailMC").replace(/[@,.]/g, "") ===
         localStorage.getItem("reciever")
       ) {
         const newMail = action.payload;
@@ -47,7 +55,7 @@ const mailSlice = createSlice({
       const existingMailIndex = state.mails.findIndex(
         (mail) => mail.id === updatedMail.id
       );
-      if (!existingMail.isRead) {
+      if (state.inbox && !existingMail.isRead) {
         state.unread--;
         state.mails.splice(existingMailIndex, 1, updatedMail);
       }
